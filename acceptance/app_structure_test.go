@@ -7,6 +7,7 @@ import (
 	. "github.com/onsi/gomega"
 	"github.com/sclevine/agouti"
 	. "github.com/sclevine/agouti/matchers"
+	"github.com/18F/cf-deck/acceptance/util"
 
 	"net/http/httptest"
 )
@@ -83,7 +84,7 @@ var _ = Describe("AppStructure", func() {
 			Expect(page.First(".disk-quota-data")).To(BeFound())
 		})
 
-		//MARKETPLACE TESTS
+		// MARKETPLACE TESTS
 		By("allowing the user to click a dropdown menu labeled 'Marketplace'", func() {
 			Expect(page.Find("#org-dropdown-btn")).To(BeVisible())
 			Expect(page.Find("#org-dropdown-btn").Click()).To(Succeed())
@@ -106,7 +107,6 @@ var _ = Describe("AppStructure", func() {
 		})
 
 		By("allowing the user to search for a service", func() {
-			delayForRendering()
 			rowCountPreSearch, _ := page.All(".service-name-data").Count()
 			Expect(page.Find("#serviceSearch").Fill("zzzzzzzzz1111zzz")).To(Succeed())
 			Expect(page.All(".service-name-data")).NotTo(HaveCount(rowCountPreSearch))
